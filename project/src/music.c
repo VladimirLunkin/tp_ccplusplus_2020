@@ -25,16 +25,35 @@ music_track* create_track_library(const char *path_file, size_t *num) {
         return NULL;
     }
 
+    char buf[3][SIZE_BUF];
     for (size_t i = 0; i < *num; ++i) {
         if (fscanf(fptr, "%s%s%s%d",
-            track_library[i].author,
-            track_library[i].performer,
-            track_library[i].name,
+            buf[0],
+            buf[1],
+            buf[2],
             &track_library[i].duration) != 4) {
             fclose(fptr);
             return NULL;
         }
+        track_library[i].author = (char*)malloc((strlen(buf[0]) + 1) * sizeof(char));
+        track_library[i].performer = (char*)malloc((strlen(buf[1]) + 1) * sizeof(char));
+        track_library[i].name = (char*)malloc((strlen(buf[2]) + 1) * sizeof(char));
+        if (track_library[i].author == NULL || track_library[i].performer == NULL || track_library[i].name == NULL) {
+            free(track_library[i].author);
+            free(track_library[i].performer);
+            free(track_library[i].name);
+            fclose(fptr);
+            *num = i;
+            return NULL;
+        }
+
+        strcpy(track_library[i].author, buf[0]);
+        strcpy(track_library[i].performer, buf[1]);
+        strcpy(track_library[i].name, buf[2]);
+
+        print_track_info(&track_library[i]);
     }
+    
     fclose(fptr);
     return track_library;
 }
@@ -64,9 +83,11 @@ void print_track_info(music_track *track) {
         track->duration);
 }
 
-int free_track_library(music_track *track_library) {
-    if (track_library == NULL) {
-        return 1;
+int free_track_library(music_track *track_library, const size_t num) {
+    for (size_t i = 0; i < num; ++i) {
+        free(track_library[i].author);
+        free(track_library[i].performer);
+        free(track_library[i].name);
     }
     free(track_library);
     return 0;

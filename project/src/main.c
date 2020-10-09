@@ -15,13 +15,13 @@ int main(int argc, char *argv[]) {
     }
 
     puts("Enter author name:");
-    char author[STR_LEN];
+    char author[SIZE_BUF];
     if (scanf("%s", author) != 1) {
         return 1;
     }
     print_tracks_by_author(track_library, num, author);
 
-    free_track_library(track_library);
+    free_track_library(track_library, num);
 
     return 0;
 }
