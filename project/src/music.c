@@ -92,3 +92,7 @@ int free_track_library(music_track *track_library, const size_t num) {
     free(track_library);
     return 0;
 }
+
+int check_test(int a) {
+    return a;
+}

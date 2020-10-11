@@ -1,1 +1,14 @@
-txt
+project/tests/data/txt
+# CMake files
+tmp/
+CMakeFiles/
+CMakeCache.txt
+cmake-build-debug/
+*.cmake
+
+# Google test files
+googletest/
+
+# Other files
+.idea/
+.travis.yml
