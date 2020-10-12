@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/VladimirLunkin/tp_ccplusplus_2020.svg?token=LJf5ppFzwXz3ppN1Wz53&branch=main)](https://travis-ci.com/VladimirLunkin/tp_ccplusplus_2020)
+[![Build Status](https://travis-ci.com/VladimirLunkin/tp_ccplusplus_2020.svg?token=LJf5ppFzwXz3ppN1Wz53&branch=making-hw-1)](https://travis-ci.com/VladimirLunkin/tp_ccplusplus_2020)
 
 # tp_ccplusplus_2020
 
