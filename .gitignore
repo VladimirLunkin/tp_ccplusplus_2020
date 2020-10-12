@@ -1,6 +1,5 @@
-project/tests/data/txt
 # CMake files
-tmp/
+project/build/
 CMakeFiles/
 CMakeCache.txt
 cmake-build-debug/

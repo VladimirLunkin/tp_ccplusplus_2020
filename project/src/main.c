@@ -3,7 +3,6 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        puts("missing path");
         return 1;
     }
     const char *path_file = argv[1];

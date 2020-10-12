@@ -8,9 +8,8 @@ music_track* create_track_library(const char *path_file, size_t *num) {
         return NULL;
     }
 
-    FILE *fptr = fopen(path_file, "r");
+    FILE *fptr = fopen(path_file, "rt");
     if (fptr == NULL) {
-        printf("Неверный путь: %s\n", path_file);
         return NULL;
     }
 
@@ -50,8 +49,6 @@ music_track* create_track_library(const char *path_file, size_t *num) {
         strcpy(track_library[i].author, buf[0]);
         strcpy(track_library[i].performer, buf[1]);
         strcpy(track_library[i].name, buf[2]);
-
-        print_track_info(&track_library[i]);
     }
     
     fclose(fptr);
@@ -91,8 +88,4 @@ int free_track_library(music_track *track_library, const size_t num) {
     }
     free(track_library);
     return 0;
-}
-
-int check_test(int a) {
-    return a;
 }
