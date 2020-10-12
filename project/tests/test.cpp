@@ -7,7 +7,7 @@ extern "C" {
 }
 
 TEST(wrong_arguments, empty_path_file) {
-    char *path_file = NULL;
+    const char *path_file = NULL;
     size_t num = 0;
     ASSERT_EQ(NULL, create_track_library(path_file, &num));
 }
@@ -23,6 +23,7 @@ TEST(wrong_arguments, wrong_file_format) {
     char path_file[] = "../tests/data/wrong_file_formatx";
     for (char i = '1'; i <= '3'; ++i) {
         path_file[strlen(path_file) - 1] = i;
-        ASSERT_EQ(NULL, create_track_library(path_file, &num));
+        music_track *track_library = create_track_library(path_file, &num);
+        ASSERT_EQ(NULL, track_library);
     }
 }

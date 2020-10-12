@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
     puts("Enter author name:");
     char author[SIZE_BUF];
     if (scanf("%s", author) != 1) {
+        free_track_library(track_library, num);
         return 1;
     }
     print_tracks_by_author(track_library, num, author);
