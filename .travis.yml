@@ -1,12 +1,13 @@
 dist: focal
 language: c
+sudo: true
 
 os: linux
 
 compiler: gcc
 
 install:
-    - sudo apt  install valgrind
+    - sudo apt-get install valgrind
 
 script:
     # скрипт сборки и тестирования проекта:
