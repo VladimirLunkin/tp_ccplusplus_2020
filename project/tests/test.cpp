@@ -20,12 +20,9 @@ TEST(wrong_arguments, wrong_path_file) {
 
 TEST(wrong_arguments, wrong_file_format) {
     size_t num = 0;
-    const char *path_file = "/home/vladimir/Документы/tp_ccplusplus_2020/project/tests/data/wrong_file_format1";
-    ASSERT_EQ(NULL, create_track_library(path_file, &num));
-
-    path_file = "/home/vladimir/Документы/tp_ccplusplus_2020/project/tests/data/wrong_file_format2";
-    ASSERT_EQ(NULL, create_track_library(path_file, &num));
-
-    path_file = "/home/vladimir/Документы/tp_ccplusplus_2020/project/tests/data/wrong_file_format3";
-    ASSERT_EQ(NULL, create_track_library(path_file, &num));
+    char path_file[] = "../tests/data/wrong_file_formatx";
+    for (char i = '1'; i <= '3'; ++i) {
+        path_file[strlen(path_file) - 1] = i;
+        ASSERT_EQ(NULL, create_track_library(path_file, &num));
+    }
 }

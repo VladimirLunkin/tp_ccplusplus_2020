@@ -1,0 +1,21 @@
+dist: focal
+
+language: c
+
+os: linux
+
+compiler: gcc
+
+
+install:
+    # скрипт настройки среды и установки зависимостей:
+    - source ci/travis/install-$TRAVIS_OS_NAME.sh
+
+script:
+    # скрипт сборки и тестирования проекта:
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make clean && make
+    - ctest
+    #- ctest --output-on-failure
