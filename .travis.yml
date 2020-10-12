@@ -13,6 +13,7 @@ compiler: gcc
 
 script:
     # скрипт сборки и тестирования проекта:
+    - cd project/
     - mkdir build
     - cd build
     - cmake ..
