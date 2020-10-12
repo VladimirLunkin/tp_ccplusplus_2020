@@ -5,6 +5,8 @@ os: linux
 
 compiler: gcc
 
+install:
+    - sudo apt  install valgrind
 
 script:
     # скрипт сборки и тестирования проекта:
@@ -13,7 +15,9 @@ script:
     - cd build
     - cmake ..
     - make clean && make
-    - ctest
+    - ctest --output-on-failure
     - ./tests/test_tests
     - valgrind --tool=memcheck --leak-check=full ./tests/test_tests
-    - ctest --output-on-failure
+
+test_script:
+    - ctest -C %CONFIGURATION% --output-on-failure

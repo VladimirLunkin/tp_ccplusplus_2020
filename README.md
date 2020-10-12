@@ -1,4 +1,7 @@
+[![Build Status](https://travis-ci.com/VladimirLunkin/tp_ccplusplus_2020.svg?token=LJf5ppFzwXz3ppN1Wz53&branch=main)](https://travis-ci.com/VladimirLunkin/tp_ccplusplus_2020)
+
 # tp_ccplusplus_2020
+
 Домашнее задание №1: ИЗ №1
 
 Вариант #16
