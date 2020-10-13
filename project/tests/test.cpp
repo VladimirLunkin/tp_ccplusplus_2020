@@ -7,15 +7,15 @@ extern "C" {
 }
 
 TEST(wrong_arguments, empty_path_file) {
-    const char *path_file = NULL;
+    const char *path_file = nullptr;
     size_t num = 0;
-    ASSERT_EQ(NULL, create_track_library(path_file, &num));
+    ASSERT_EQ(nullptr, create_track_library(path_file, &num));
 }
 
 TEST(wrong_arguments, wrong_path_file) {
     const char *path_file = "wrong";
     size_t num = 0;
-    ASSERT_EQ(NULL, create_track_library(path_file, &num));
+    ASSERT_EQ(nullptr, create_track_library(path_file, &num));
 }
 
 TEST(wrong_arguments, wrong_file_format) {
@@ -24,26 +24,26 @@ TEST(wrong_arguments, wrong_file_format) {
     for (char i = '1'; i <= '3'; ++i) {
         path_file[strlen(path_file) - 1] = i;
         music_track *track_library = create_track_library(path_file, &num);
-        ASSERT_EQ(NULL, track_library);
+        ASSERT_EQ(nullptr, track_library);
     }
 }
 
 TEST(wrong_arguments, read_track) {
-    FILE *fptr = NULL;
-    music_track *track = NULL;
+    FILE *fptr = nullptr;
+    music_track *track = nullptr;
     ASSERT_EQ(1, read_track_info(fptr, track));
 }
 
 TEST(wrong_arguments, print_tracks_by_author) {
-    const char *path_output_file = NULL;
-    music_track *track_library = NULL;
+    const char *path_output_file = nullptr;
+    music_track *track_library = nullptr;
     size_t num = 0;
-    char *author = NULL;
+    char *author = nullptr;
     ASSERT_EQ(1, print_tracks_by_author(path_output_file, track_library, num, author));
 }
 
 TEST(wrong_arguments, print_track_info) {
-    FILE *fptr = NULL;
-    music_track *track = NULL;
+    FILE *fptr = nullptr;
+    music_track *track = nullptr;
     ASSERT_EQ(1, print_track_info(fptr, track));
 }

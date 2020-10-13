@@ -3,41 +3,6 @@
 #include <string.h>
 
 
-music_track* create_track_library(const char *path_input_file, size_t *num) {
-    if (path_input_file == NULL) {
-        return NULL;
-    }
-
-    FILE *fptr = fopen(path_input_file, "rt");
-    if (fptr == NULL) {
-        return NULL;
-    }
-
-    if (fscanf(fptr, "%ld", num) != 1) {
-        fclose(fptr);
-        return NULL;
-    }
-
-    music_track *track_library = (music_track*)malloc(*num * sizeof(music_track));
-    if (track_library == NULL) {
-        fclose(fptr);
-        return NULL;
-    }
-
-    char buf[3][SIZE_BUF];
-    for (size_t i = 0; i < *num; ++i) {
-        if (read_track_info(fptr, &track_library[i])) {
-            free_track_library(track_library, i);
-            fclose(fptr);
-            return NULL;
-        }
-    }
-    
-    fclose(fptr);
-
-    return track_library;
-}
-
 int read_track_info(FILE *fptr, music_track *track) {
     if (fptr == NULL || track == NULL) {
         return 1;
@@ -68,7 +33,59 @@ int read_track_info(FILE *fptr, music_track *track) {
 
     return 0;
 }
+int print_track_info(FILE *fptr, music_track *track) {
+    if (fptr == NULL || track == NULL) {
+        return 1;
+    }
 
+    fprintf(fptr, "%s\t%s\t%s\t%d\n",
+            track->author,
+            track->performer,
+            track->name,
+            track->duration);
+
+    return 0;
+}
+void free_track(music_track *track) {
+    free(track->author);
+    free(track->performer);
+    free(track->name);
+}
+
+music_track* create_track_library(const char *path_input_file, size_t *num) {
+    if (path_input_file == NULL) {
+        return NULL;
+    }
+
+    FILE *fptr = fopen(path_input_file, "rt");
+    if (fptr == NULL) {
+        return NULL;
+    }
+
+    if (fscanf(fptr, "%ld", num) != 1) {
+        fclose(fptr);
+        return NULL;
+    }
+
+    music_track *track_library = (music_track*)malloc(*num * sizeof(music_track));
+    if (track_library == NULL) {
+        fclose(fptr);
+        return NULL;
+    }
+
+    char buf[3][SIZE_BUF];
+    for (size_t i = 0; i < *num; ++i) {
+        if (read_track_info(fptr, &track_library[i])) {
+            free_track_library(track_library, i);
+            fclose(fptr);
+            return NULL;
+        }
+    }
+
+    fclose(fptr);
+
+    return track_library;
+}
 int print_tracks_by_author(const char *path_output_file, music_track *track_library, const size_t num, const char *author) {
     if (track_library == NULL || author == NULL) {
         return 1;
@@ -97,27 +114,9 @@ int print_tracks_by_author(const char *path_output_file, music_track *track_libr
 
     return 0;
 }
-
-int print_track_info(FILE *fptr, music_track *track) {
-    if (fptr == NULL || track == NULL) {
-        return 1;
-    }
-
-    fprintf(fptr, "%s\t%s\t%s\t%d\n",
-        track->author,
-        track->performer,
-        track->name,
-        track->duration);
-
-    return 0;
-}
-
-int free_track_library(music_track *track_library, const size_t num) {
+void free_track_library(music_track *track_library, const size_t num) {
     for (size_t i = 0; i < num; ++i) {
-        free(track_library[i].author);
-        free(track_library[i].performer);
-        free(track_library[i].name);
+        free_track(&track_library[i]);
     }
     free(track_library);
-    return 0;
 }
