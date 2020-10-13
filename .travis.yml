@@ -10,7 +10,6 @@ install:
     - sudo apt-get install cppcheck
 
 script:
-    # скрипт сборки и тестирования проекта:
     - cd project/
     - mkdir build
     - cd build

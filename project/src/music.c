@@ -26,7 +26,7 @@ music_track* create_track_library(const char *path_input_file, size_t *num) {
 
     char buf[3][SIZE_BUF];
     for (size_t i = 0; i < *num; ++i) {
-        if (read_track_info(fptr, track_library, i)) {
+        if (read_track_info(fptr, &track_library[i])) {
             free_track_library(track_library, i);
             fclose(fptr);
             return NULL;
@@ -34,30 +34,38 @@ music_track* create_track_library(const char *path_input_file, size_t *num) {
     }
     
     fclose(fptr);
+
     return track_library;
 }
 
-int read_track_info(FILE *fptr, music_track *track_library, size_t num) {
+int read_track_info(FILE *fptr, music_track *track) {
+    if (fptr == NULL || track == NULL) {
+        return 1;
+    }
+
     char buf[3][SIZE_BUF];
     if (fscanf(fptr, "%s%s%s%d",
                buf[0],
                buf[1],
                buf[2],
-               &track_library[num].duration) != 4) {
+               &track->duration) != 4) {
         return 1;
     }
-    track_library[num].author = (char*)malloc((strlen(buf[0]) + 1) * sizeof(char));
-    track_library[num].performer = (char*)malloc((strlen(buf[1]) + 1) * sizeof(char));
-    track_library[num].name = (char*)malloc((strlen(buf[2]) + 1) * sizeof(char));
-    if (track_library[num].author == NULL || track_library[num].performer == NULL || track_library[num].name == NULL) {
-        free(track_library[num].author);
-        free(track_library[num].performer);
-        free(track_library[num].name);
+
+    track->author = (char*)malloc((strlen(buf[0]) + 1) * sizeof(char));
+    track->performer = (char*)malloc((strlen(buf[1]) + 1) * sizeof(char));
+    track->name = (char*)malloc((strlen(buf[2]) + 1) * sizeof(char));
+    if (track->author == NULL || track->performer == NULL || track->name == NULL) {
+        free(track->author);
+        free(track->performer);
+        free(track->name);
         return 1;
     }
-    strcpy(track_library[num].author, buf[0]);
-    strcpy(track_library[num].performer, buf[1]);
-    strcpy(track_library[num].name, buf[2]);
+
+    strcpy(track->author, buf[0]);
+    strcpy(track->performer, buf[1]);
+    strcpy(track->name, buf[2]);
+
     return 0;
 }
 
@@ -86,12 +94,13 @@ int print_tracks_by_author(const char *path_output_file, music_track *track_libr
     }
 
     fclose(fptr);
+
     return 0;
 }
 
-void print_track_info(FILE *fptr, music_track *track) {
+int print_track_info(FILE *fptr, music_track *track) {
     if (fptr == NULL || track == NULL) {
-        return;
+        return 1;
     }
 
     fprintf(fptr, "%s\t%s\t%s\t%d\n",
@@ -99,6 +108,8 @@ void print_track_info(FILE *fptr, music_track *track) {
         track->performer,
         track->name,
         track->duration);
+
+    return 0;
 }
 
 int free_track_library(music_track *track_library, const size_t num) {

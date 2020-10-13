@@ -27,3 +27,23 @@ TEST(wrong_arguments, wrong_file_format) {
         ASSERT_EQ(NULL, track_library);
     }
 }
+
+TEST(wrong_arguments, read_track) {
+    FILE *fptr = NULL;
+    music_track *track = NULL;
+    ASSERT_EQ(1, read_track_info(fptr, track));
+}
+
+TEST(wrong_arguments, print_tracks_by_author) {
+    const char *path_output_file = NULL;
+    music_track *track_library = NULL;
+    size_t num = 0;
+    char *author = NULL;
+    ASSERT_EQ(1, print_tracks_by_author(path_output_file, track_library, num, author));
+}
+
+TEST(wrong_arguments, print_track_info) {
+    FILE *fptr = NULL;
+    music_track *track = NULL;
+    ASSERT_EQ(1, print_track_info(fptr, track));
+}
