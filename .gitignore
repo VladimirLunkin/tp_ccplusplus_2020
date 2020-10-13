@@ -10,3 +10,4 @@ googletest/
 
 # Other files
 .idea/
+linters/

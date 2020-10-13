@@ -1,6 +1,5 @@
 dist: focal
-language: c
-sudo: true
+language: cpp
 
 os: linux
 
@@ -8,6 +7,7 @@ compiler: gcc
 
 install:
     - sudo apt-get install valgrind
+    - sudo apt-get install cppcheck
 
 script:
     # скрипт сборки и тестирования проекта:
@@ -17,8 +17,4 @@ script:
     - cmake ..
     - make clean && make
     - ctest --output-on-failure
-    - ./tests/test_tests
     - valgrind --tool=memcheck --leak-check=full ./tests/test_tests
-
-test_script:
-    - ctest -C %CONFIGURATION% --output-on-failure
