@@ -17,3 +17,4 @@ script:
     - make clean && make
     - ctest --output-on-failure
     - valgrind --tool=memcheck --leak-check=full ./tests/test_tests
+    - valgrind --tool=memcheck --leak-check=full ./tests/tests_tests
