@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 
+#include <fstream>
+
 extern "C" {
 #include "music.h"
 }
@@ -52,4 +54,22 @@ TEST(logic_test, print_track_info) {
 
     free_track(&track2);
     fclose(fptr);
+}
+
+TEST(logic_test, create_track_library) {
+    const char *path_input_file = "../tests/data/lib1";
+    const char *path_output_file = "../tests/tmp/test1";
+
+    size_t num = 0;
+    music_track *track_library = create_track_library(path_input_file, &num);
+    if (track_library == nullptr) {
+        FAIL();
+    }
+
+    const char *author = "Хаски";
+    print_tracks_by_author(path_output_file, track_library, num, author);
+
+    // Ночная идея сравнивать файл вывода и файл с ответом
+
+    free_track_library(track_library, num);
 }
