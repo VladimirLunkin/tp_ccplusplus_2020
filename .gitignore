@@ -10,5 +10,4 @@ googletest/
 
 # Other files
 .idea/
-project/tests/tmp/
 linters/

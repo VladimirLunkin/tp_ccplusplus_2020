@@ -35,7 +35,7 @@ TEST(logic_test, read_track_info) {
 
 TEST(logic_test, print_track_info) {
     const char *path_output_file = "../tests/tmp/print_track_info/test1";
-    FILE *fptr = fopen(path_output_file, "a+");
+    FILE *fptr = fopen(path_output_file, "w+");
     if (fptr == nullptr) {
         FAIL();
     }
