@@ -102,12 +102,14 @@ int print_tracks_by_author(const char *path_output_file, music_track *track_libr
     size_t count = 0;
     for (size_t i = 0; i < num; ++i) {
         if (strcmp(author, track_library[i].author) == 0) {
-            print_track_info(fptr, &track_library[i]);
             count++;
         }
     }
-    if (count == 0) {
-        printf("%s\n", "author not found");
+    fprintf(fptr, "%ld\n", count);
+    for (size_t i = 0; i < num; ++i) {
+        if (strcmp(author, track_library[i].author) == 0) {
+            print_track_info(fptr, &track_library[i]);
+        }
     }
 
     fclose(fptr);
