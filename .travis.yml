@@ -7,9 +7,14 @@ compiler: gcc
 
 install:
     - sudo apt-get install valgrind
-    - sudo apt-get install cppcheck
+    - sudo pip install cpplint
 
 script:
+    - cppcheck --std=c99 --enable=all -inconclusive project/src
+    - cppcheck --std=c++11 --enable=all -inconclusive project/tests
+    - cpplint --filter=-legal/copyright,-readability/casting project/source/*.c
+    - cpplint --filter=-legal/copyright,-readability/casting project/tests/*.cpp
+    - cpplint --filter=-legal/copyright,-readability/casting project/include/*.
     - cd project/
     - mkdir build
     - cd build
