@@ -1,0 +1,14 @@
+# CMake files
+project/build/
+CMakeFiles/
+CMakeCache.txt
+cmake-build-debug/
+*.cmake
+
+# Google test files
+googletest/
+
+# Other files
+.idea/
+project/tests/tmp/logic_test/*
+project/tests/tmp/print_track_info/*
