@@ -9,6 +9,7 @@ install:
     - sudo apt-get install valgrind
     - sudo apt-get install cppcheck
     - sudo pip install cpplint
+    - sudo apt-get install clang
 
 script:
     - ./linters/run.sh
@@ -19,3 +20,6 @@ script:
     - make clean && make
     - valgrind --tool=memcheck --leak-check=full ./tests/test1_tests
     - valgrind --tool=memcheck --leak-check=full ./tests/test2_tests
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
