@@ -7,9 +7,9 @@ compiler: gcc
 
 install:
     - sudo apt-get install valgrind
+    - sudo apt-get install clang
     - sudo apt-get install cppcheck
     - sudo pip install cpplint
-    - sudo apt-get install clang
 
 script:
     - ./linters/run.sh
