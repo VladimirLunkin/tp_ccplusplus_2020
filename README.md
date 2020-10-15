@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/VladimirLunkin/tp_ccplusplus_2020.svg?token=LJf5ppFzwXz3ppN1Wz53&branch=making-hw-1)](https://travis-ci.com/VladimirLunkin/tp_ccplusplus_2020)
+[![codecov](https://codecov.io/gh/VladimirLunkin/tp_ccplusplus_2020/branch/making-hw-1/graph/badge.svg?token=04FC742OH9)](undefined)
 
 # tp_ccplusplus_2020
 
