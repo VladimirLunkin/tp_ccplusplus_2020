@@ -1,12 +1,11 @@
 #include "gtest/gtest.h"
 
-#include <fstream>
 
 extern "C" {
-#include "music.h"
+#include "music.h"  // NOLINT
 }
 
-void cmp_track(music_track &track1, music_track &track2) {
+void cmp_track(const music_track &track1, const music_track &track2) {
     ASSERT_STREQ(track1.author, track2.author);
     ASSERT_STREQ(track1.performer, track2.performer);
     ASSERT_STREQ(track1.name, track2.name);
@@ -22,8 +21,8 @@ void cmp_file(const char *path_output_file, const char *path_result_file) {
 
     size_t num1;
     size_t num2;
-    if (fscanf(fptr_out, "%ld", &num1) != 1 ||
-        fscanf(fptr_res, "%ld", &num2) != 1 ||
+    if (fscanf(fptr_out, "%zu", &num1) != 1 ||
+        fscanf(fptr_res, "%zu", &num2) != 1 ||
         num1 != num2) {
         fclose(fptr_out);
         fclose(fptr_res);
@@ -49,14 +48,15 @@ void cmp_file(const char *path_output_file, const char *path_result_file) {
     fclose(fptr_res);
 }
 
-void test_main(const char *path_input_file, const char *path_output_file, const char *author, const char *path_result_file) {
+void test_main(const char *path_input_file, const char *path_output_file,
+               const char *author, const char *path_result_file) {
     size_t num = 0;
-    music_track *track_library = create_track_library(path_input_file, &num);
-    if (track_library == nullptr) {
+    music_track *track_lib = create_track_library(path_input_file, &num);
+    if (track_lib == nullptr) {
         FAIL();
     }
-    print_tracks_by_author(path_output_file, track_library, num, author);
-    free_track_library(track_library, num);
+    print_tracks_by_author(path_output_file, track_lib, num, author);
+    free_track_library(track_lib, num);
 
     cmp_file(path_output_file, path_result_file);
 }
@@ -71,7 +71,6 @@ TEST(test_func, read_track_info) {
     music_track track1 = {"Aa", "Bb", "Cc", 1};
     music_track track2;
     if (read_track_info(fptr, &track2)) {
-        fclose(fptr);
         FAIL();
     }
 
@@ -95,7 +94,6 @@ TEST(test_func, print_track_info) {
 
     fseek(fptr, pos, SEEK_SET);
     if (read_track_info(fptr, &track2)) {
-        fclose(fptr);
         FAIL();
     }
 
