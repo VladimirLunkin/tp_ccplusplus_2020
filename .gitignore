@@ -12,3 +12,4 @@ googletest/
 .idea/
 project/tests/tmp/logic_test/*
 project/tests/tmp/print_track_info/*
+linters/
