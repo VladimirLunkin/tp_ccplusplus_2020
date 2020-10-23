@@ -16,8 +16,8 @@ fi
 ${CPPCHECK} project/src/* project/tests/*.cpp --enable=all --error-exitcode=1 -I project/include --suppress=missingInclude # --check-config
 
 print_header "RUN cpplint.py"
-cpplint --filter=-legal/copyright,-readability/casting project/include/*.h
-cpplint --filter=-legal/copyright,-readability/casting project/src/*.c
+cpplint --filter=-legal/copyright,-readability/casting project/include/consistently/*.h
+cpplint --filter=-legal/copyright,-readability/casting project/src/consistently/*.c
 cpplint --filter=-legal/copyright,-readability/casting project/tests/*.cpp
 
 print_header "SUCCESS"

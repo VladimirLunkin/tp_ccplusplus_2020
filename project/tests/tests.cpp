@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 extern "C" {
-#include "test.h"  // NOLINT
+#include "consistently/character_series.h"  // NOLINT
 }
 
 TEST(tests, test) {
