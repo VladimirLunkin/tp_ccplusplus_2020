@@ -3,9 +3,13 @@
 
 #define INIT_NUMBER_SERIES 10
 
+#include <stdlib.h>
 
-struct  Series;
-typedef struct Series Series;
+typedef struct {
+    int64_t length;
+    char symbol;
+    int64_t quantity;
+} Series;
 
 struct Sets;
 typedef struct Sets Sets;
@@ -17,7 +21,7 @@ int free_sets(Sets *sets);
 int sets_push(Sets *sets, Series *series);
 int sets_resize(Sets *sets, ssize_t size);
 
-ssize_t popular_series(const Sets *sets);
+int popular_series(const Sets *sets);
 int print_series(const Series *series);
 int print_series_from_sets(const Sets *sets, ssize_t ind);
 

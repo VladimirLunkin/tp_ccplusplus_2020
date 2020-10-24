@@ -1,13 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "consistently/character_series.h"
 
 
-struct Series{
-    int64_t length;
-    char symbol;
-    int64_t quantity;
-};
 struct Sets{
     Series *series;
     ssize_t size;
@@ -120,12 +114,12 @@ int sets_resize(Sets *sets, ssize_t size) {
     return 0;
 }
 
-ssize_t popular_series(const Sets *sets) {
+int popular_series(const Sets *sets) {
     if (sets == NULL) {
         return -1;
     }
 
-    ssize_t ind_popular_series = 0;
+    ssize_t ind_popular_series = -1;
     int64_t quantity = 0;
     for (ssize_t i = 0; i < sets->size; ++i) {
         if (quantity < sets->series[i].quantity) {
@@ -149,7 +143,7 @@ int print_series(const Series *series) {
     return 0;
 }
 int print_series_from_sets(const Sets *sets, ssize_t ind) {
-    if (sets == NULL || sets->size < ind || ind < 0) {
+    if (sets == NULL || sets->size <= ind || ind < 0) {
         return 1;
     }
 
