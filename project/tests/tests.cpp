@@ -48,10 +48,17 @@ TEST(wrong_arguments, popular_series_nullptr) {
     ASSERT_EQ(static_cast<int>(ERROR::POPULAR_SERIES), popular_series(sets));
 }
 
-TEST(wrong_arguments, print_series_nullptr) {
+TEST(wrong_arguments, print_series_path_nullptr) {
     const char *path = nullptr;
+    Series series = {1, 'a', 1};
+    ASSERT_EQ(static_cast<int>(ERROR::WRONG_ARG), print_series(path, &series));
+}
+
+TEST(wrong_arguments, print_series_nullptr) {
+    const char path_input[] = SOURCE_DIR"/test_data/test1";
     Series *series = nullptr;
-    ASSERT_EQ(static_cast<int>(ERROR::WRONG_ARG), print_series(path, series));
+    ASSERT_EQ(static_cast<int>(ERROR::WRONG_ARG),
+              print_series(path_input, series));
 }
 
 TEST(wrong_arguments, print_series_from_sets_nullptr) {
@@ -109,6 +116,22 @@ TEST(test_func, popular_series) {
                   popular_series(sets));
         free_sets(sets);
     }
+}
+
+TEST(test_func, print_series) {
+    const char path[] = SOURCE_DIR"/test_output/print_series";
+    Series series = {1, 'a', 1};
+    ASSERT_NE(static_cast<int>(ERROR::WRONG_ARG), print_series(path, &series));
+}
+
+TEST(test_func, print_series_from_sets) {
+    const char path_input[] = SOURCE_DIR"/test_data/test0";
+    const char path_output[] = SOURCE_DIR"/test_output/print_series_from_sets";
+    Sets *sets = create_sets_from_file(path_input);
+    ssize_t ind = 0;
+    EXPECT_NE(static_cast<int>(ERROR::WRONG_ARG),
+              print_series_from_sets(path_output, sets, ind));
+    free_sets(sets);
 }
 
 TEST(logic_test, test0) {

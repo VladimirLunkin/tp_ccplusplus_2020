@@ -10,5 +10,5 @@ googletest/
 
 # Other files
 .idea/
+project/tests/test_data/info*
 project/tests/test_output/*
-project/tests/test_data/info
