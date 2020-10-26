@@ -130,24 +130,31 @@ int popular_series(const Sets *sets) {
 
     return ind_popular_series;
 }
-int print_series(const Series *series) {
-    if (series == NULL) {
+int print_series(const char *path, const Series *series) {
+    if (path == NULL || series == NULL) {
+        return 1;
+    }
+
+    FILE *fptr = fopen(path, "w");
+    if (fptr == NULL) {
         return 1;
     }
 
     for (int64_t i = 0; i < series->length; ++i) {
-        printf("%c", series->symbol);
+        fprintf(fptr, "%c", series->symbol);
     }
-    printf(" - %ld\n", series->quantity);
+    fprintf(fptr, " - %ld\n", series->quantity);
+
+    fclose(fptr);
 
     return 0;
 }
-int print_series_from_sets(const Sets *sets, ssize_t ind) {
-    if (sets == NULL || sets->size <= ind || ind < 0) {
+int print_series_from_sets(const char *path, const Sets *sets, ssize_t ind) {
+    if (path == NULL || sets == NULL || sets->size <= ind || ind < 0) {
         return 1;
     }
 
-    if (print_series(&(sets->series[ind])) != 0) {
+    if (print_series(path, &(sets->series[ind])) != 0) {
         return 1;
     }
 
