@@ -3,7 +3,7 @@
 
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) return 1;
+    if (argc != 3) return 1;
     const char *path_input_file = argv[1];
     const char *path_output_file = argv[2];
 
