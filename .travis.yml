@@ -14,11 +14,11 @@ install:
 script:
     - ./linters/run.sh
     - cd project/
+    - mkdir tests/test_output
     - mkdir build
     - cd build
     - cmake ..
     - make clean && make
-    - mkdir tests/test_output
     - valgrind --tool=memcheck --leak-check=full ./tests/tests_tests
 
 after_success:
