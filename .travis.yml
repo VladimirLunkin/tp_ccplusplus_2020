@@ -18,6 +18,7 @@ script:
     - cd build
     - cmake ..
     - make clean && make
+    - mkdir tests/test_output
     - valgrind --tool=memcheck --leak-check=full ./tests/tests_tests
 
 after_success:
