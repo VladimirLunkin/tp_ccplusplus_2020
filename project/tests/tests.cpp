@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 extern "C" {
-#include "consistently/character_series.h"
+#include "consistently/character_series_c.h"
 }
 
 enum class ERROR {

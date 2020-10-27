@@ -1,5 +1,5 @@
-#ifndef PROJECT_INCLUDE_CONSISTENTLY_CHARACTER_SERIES_H_
-#define PROJECT_INCLUDE_CONSISTENTLY_CHARACTER_SERIES_H_
+#ifndef PROJECT_INCLUDE_CONSISTENTLY_CHARACTER_SERIES_C_H_
+#define PROJECT_INCLUDE_CONSISTENTLY_CHARACTER_SERIES_C_H_
 
 #define INIT_NUMBER_SERIES 10
 
@@ -25,4 +25,4 @@ int popular_series(const Sets *sets);
 int print_series(const char *path, const Series *series);
 int print_series_from_sets(const char *path, const Sets *sets, ssize_t ind);
 
-#endif  // PROJECT_INCLUDE_CONSISTENTLY_CHARACTER_SERIES_H_
+#endif  // PROJECT_INCLUDE_CONSISTENTLY_CHARACTER_SERIES_C_H_

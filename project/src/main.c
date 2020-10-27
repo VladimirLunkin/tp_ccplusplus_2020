@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "consistently/character_series.h"
+#include "consistently/character_series_c.h"
 
 
 int main(int argc, char *argv[]) {
