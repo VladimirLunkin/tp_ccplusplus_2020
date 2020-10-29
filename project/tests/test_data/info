@@ -1,0 +1,10 @@
+test0: 11 серий разной длины
+    ans: 0
+test1: a, b, c, d - 100 б
+    ans: a
+test2: a, b, c, d - 1 Кб
+    ans: 3
+test3: a - 1 Мб
+    ans: 0
+test4: a, b - 1 Кб
+    ans: 5
