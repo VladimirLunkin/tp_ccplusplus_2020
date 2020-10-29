@@ -21,7 +21,11 @@ int free_sets(Sets *sets);
 int sets_push(Sets *sets, Series *series);
 int sets_resize(Sets *sets, ssize_t size);
 
+ssize_t get_size(const Sets *sets);
+Series *get_series(const Sets *sets, ssize_t ind);
+
 int popular_series(const Sets *sets);
+int popular_series_range(const Sets *sets, ssize_t begin, ssize_t end);
 int print_series(const char *path, const Series *series);
 int print_series_from_sets(const char *path, const Sets *sets, ssize_t ind);
 

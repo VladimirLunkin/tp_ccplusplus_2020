@@ -114,6 +114,21 @@ int sets_resize(Sets *sets, ssize_t size) {
     return 0;
 }
 
+ssize_t get_size(const Sets *sets) {
+    if (sets == NULL) {
+        return -1;
+    }
+    return sets->size;
+}
+
+Series *get_series(const Sets *sets, ssize_t ind) {
+    if (sets != NULL) {
+        return NULL;
+    }
+
+    return &(sets->series[ind]);
+}
+
 int popular_series(const Sets *sets) {
     if (sets == NULL) {
         return -1;
@@ -122,6 +137,22 @@ int popular_series(const Sets *sets) {
     ssize_t ind_popular_series = -1;
     int64_t quantity = 0;
     for (ssize_t i = 0; i < sets->size; ++i) {
+        if (quantity < sets->series[i].quantity) {
+            quantity = sets->series[i].quantity;
+            ind_popular_series = i;
+        }
+    }
+
+    return ind_popular_series;
+}
+int popular_series_range(const Sets *sets, ssize_t begin, ssize_t end) {
+    if (sets == NULL) {
+        return -1;
+    }
+
+    ssize_t ind_popular_series = -1;
+    int64_t quantity = 0;
+    for (ssize_t i = begin; i < end; ++i) {
         if (quantity < sets->series[i].quantity) {
             quantity = sets->series[i].quantity;
             ind_popular_series = i;
